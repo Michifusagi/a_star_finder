@@ -4,6 +4,18 @@
 
 using namespace engine;
 
+TEST(AstarStatus, MapError) {
+    Grid g;
+    g.rows = 0; g.cols = 0;
+    g.occ = {};
+
+    AstarConfig cfg{true, Heuristic::Manhattan, 50};
+
+    auto out = astar_plan_ex(g, {0,0}, {1,1}, cfg);
+    EXPECT_EQ(out.status, PlanStatus::MapError);
+    EXPECT_FALSE(out.result.has_value());
+}
+
 TEST(AstarStatus, OutOfBounds) {
     Grid g;
     g.rows = 3; g.cols = 3;

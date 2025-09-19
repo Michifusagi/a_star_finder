@@ -35,12 +35,20 @@ static inline double hcost(int r,int c,int gr,int gc, Heuristic h) {
 // s: start, t: target(goal)
 PlanOutcome astar_plan_ex(const Grid& g, Cell s, Cell t, const AstarConfig& cfg) {
     PlanOutcome out;
-    // 範囲外か
+
+    // グリッドのサイズチェック
+    if (g.rows <= 0 || g.cols <= 0 || g.occ.size() != g.rows * g.cols) {
+        out.status = PlanStatus::MapError;
+        return out;
+    }
+
+    // 範囲外チェック
     if (!g.in(s.r,s.c) || !g.in(t.r,t.c)){
         out.status = PlanStatus::OutOfBounds;
         return out;
     }
 
+    // スタートとゴールが障害物上にないか
     if (g.at(s.r, s.c) >= cfg.block_threshold ||
         g.at(t.r, t.c) >= cfg.block_threshold) {
         out.status = PlanStatus::InvalidArg;
