@@ -37,7 +37,12 @@ PlanOutcome astar_plan_ex(const Grid& g, Cell s, Cell t, const AstarConfig& cfg)
     PlanOutcome out;
 
     // グリッドのサイズチェック
-    if (g.rows <= 0 || g.cols <= 0 || g.occ.size() != g.rows * g.cols) {
+    if (g.rows <= 0 || g.cols <= 0) {
+        out.status = PlanStatus::MapError;
+        return out;
+    }
+    const size_t expected = static_cast<size_t>(g.rows) * static_cast<size_t>(g.cols);
+    if (g.occ.size() != expected) {
         out.status = PlanStatus::MapError;
         return out;
     }
