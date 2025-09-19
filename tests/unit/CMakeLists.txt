@@ -9,3 +9,7 @@ target_link_libraries(test_astar PRIVATE planner_core gtest_main) # ターゲッ
 add_test(NAME astar_tests COMMAND test_astar)
 
 file(COPY ${PROJECT_SOURCE_DIR}/maps DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+add_executable(test_status test_status.cpp) # ステータステスト
+target_link_libraries(test_status PRIVATE planner_core gtest_main)
+add_test(NAME astar_status_tests COMMAND test_status)
