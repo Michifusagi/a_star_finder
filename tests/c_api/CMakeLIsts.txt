@@ -1,0 +1,18 @@
+# gtest がまだ見つけられていない場合は必要
+find_package(GTest REQUIRED)
+
+add_executable(astar_c_api_tests
+    tests/c_api/test_c_api.cpp
+)
+
+target_include_directories(astar_c_api_tests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/capi/include  # astar_c.h の場所
+)
+
+target_link_libraries(astar_c_api_tests PRIVATE
+    astar            # あなたの共有ライブラリ（libastar）
+    GTest::gtest
+    GTest::gtest_main
+)
+
+add_test(NAME c_api_tests COMMAND test_c_api)

@@ -83,7 +83,7 @@ plan_status_t astar_plan_c(const int32_t* occ, int32_t rows, int32_t cols,
 
     // 6) パス出力（start→goal）。start==goal は長さ0で返す設計。
     // 結果がない場合はエラー
-    const auto& opt_path = out.result; // 例: std::optional<std::vector<Cell>>
+    const auto& opt_path = out.result; // std::optional<PlanResult>
     if (!opt_path.has_value()) {
         put_err(errbuf, errbuf_len, "ok but empty result");
         *path_len_inout = 0;
@@ -91,7 +91,7 @@ plan_status_t astar_plan_c(const int32_t* occ, int32_t rows, int32_t cols,
     }
 
     // 結果がある場合はパスを出力
-    const auto& path_rc = *opt_path; // (r,c) の配列
+    const auto& path_rc = opt_path->path; // (r,c) の配列 PlanResult の pathメンバ
     // start==goal のときは0
     if (path_rc.size() == 1 && path_rc.front().r == sy && path_rc.front().c == sx && sx == gx && sy == gy) {
         *path_len_inout = 0;
