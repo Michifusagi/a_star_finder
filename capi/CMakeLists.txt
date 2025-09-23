@@ -1,11 +1,10 @@
 add_library(astar SHARED
-    astar_c.cpp
+    src/astar_c.cpp
 )
 
 target_include_directories(astar PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/../core/include   # core のC++ヘッダ
     ${CMAKE_CURRENT_SOURCE_DIR}/include           # capi の astar_c.h
-)
+) # coreのC++ヘッダはplanner_coreがPUBLICで提供
 
 target_link_libraries(astar PRIVATE planner_core)
 

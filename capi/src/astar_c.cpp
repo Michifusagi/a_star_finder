@@ -73,10 +73,22 @@ plan_status_t astar_plan_c(const int32_t* occ, int32_t rows, int32_t cols,
         return PLAN_MAP_ERROR;
     };
 
+    // ステータス（enum）をメッセージ（文字列）にマッピング
+    auto status_message = [](PlanStatus s)->const char* {
+        switch (s) {
+        case PlanStatus::Ok:          return "";
+        case PlanStatus::NoPath:      return "no path";
+        case PlanStatus::InvalidArg:  return "invalid argument";
+        case PlanStatus::OutOfBounds: return "out of bounds";
+        case PlanStatus::MapError:    return "map error";
+        }
+        return "unknown error";
+    };
+
     plan_status_t st = to_c_status(out.status);
     if (st != PLAN_OK) {
-        put_err(errbuf, errbuf_len,
-        (out.message.empty() ? std::string("planning failed") : out.message));
+        const char* msg = status_message(out.status);
+        put_err(errbuf, errbuf_len, (*msg ? msg : "planning failed"));
         *path_len_inout = 0;
         return st;
     }
