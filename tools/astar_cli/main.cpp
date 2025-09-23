@@ -43,22 +43,21 @@ int main(int argc, char** argv) {
     else if (heur=="euclidean") cfg.heuristic = Heuristic::Euclidean;
     else cfg.heuristic = Heuristic::Octile;
 
+    // 注意：CLIは (x,y) 入力 → 内部は (r,c)=(y,x)
+    auto out = astar_plan_ex(*g, {sy,sx}, {gy,gx}, cfg);
+
     if (json) {
-        // 注意：CLIは (x,y) 入力 → 内部は (r,c)=(y,x)
-        auto res = astar_plan(*g, {sy,sx}, {gy,gx}, cfg);
         std::cout << "{"
-        << "\"found\":" << (res.has_value()?"true":"false");
-        if (res) {
-            std::cout << ",\"cost\":" << res->stats.cost
-                    << ",\"expanded\":" << res->stats.expanded
-                    << ",\"time_ms\":" << res->stats.time_ms
-                    << ",\"length_cells\":" << res->path.size();
+        << "\"found\":" << (out.result.has_value()?"true":"false");
+        if (out.result.has_value()) {
+            std::cout << ",\"cost\":" << out.result->stats.cost
+                    << ",\"expanded\":" << out.result->stats.expanded
+                    << ",\"time_ms\":" << out.result->stats.time_ms
+                    << ",\"length_cells\":" << out.result->path.size();
         }
         std::cout << "}\n";
         return 0;
     }
-
-    auto out = astar_plan_ex(*g, {sy,sx}, {gy,gx}, cfg);
 
     auto exit_code = [](PlanStatus s) {
         switch (s) {
@@ -77,16 +76,20 @@ int main(int argc, char** argv) {
             switch(out.status) {
                 case PlanStatus::NoPath:
                     std::cerr << "No path found\n";
+                    break;
                 case PlanStatus::InvalidArg:
                     std::cerr << "Invalid argument\n";
+                    break;
                 case PlanStatus::OutOfBounds:
                     std::cerr << "Out of bounds\n";
+                    break;
                 case PlanStatus::MapError:
                     std::cerr << "Map error\n";
+                    break;
             }
-        } else {
-            std::cout << "found: no\n";
         }
+        // 非JSONの失敗時はstderr側に統一
+        std::cerr << "found: no\n";
         return exit_code(out.status);
     }
 
