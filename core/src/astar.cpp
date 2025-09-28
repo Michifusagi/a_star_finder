@@ -13,7 +13,8 @@ struct Node { int r,c; double g,h; };
 struct Cmp {
     // オーバーロード（関数オブジェクトにする）
     bool operator()(const Node& a, const Node& b) const {
-        return (a.g + a.h) > (b.g + b.h); // f = g+h が小さいほど優先
+        if (a.g + a.h != b.g + b.h) return (a.g + a.h) > (b.g + b.h); // f = g+h が小さいほど優先
+        return a.h > b.h; // h が小さいほど優先
     }
 };
 
