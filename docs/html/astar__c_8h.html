@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>a_star_finder: core/include/engine/astar_c.h ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">a_star_finder
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('astar__c_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">astar_c.h ファイル</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>C API for A* planning.  
+<a href="#details">[詳解]</a></p>
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+</div>
+<p><a href="astar__c_8h_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:point_5Fi32" id="r_point_5Fi32"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpoint__i32.html">point_i32</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+列挙型</h2></td></tr>
+<tr class="memitem:ab724138fd75b4ea7be62c7a2a4076976" id="r_ab724138fd75b4ea7be62c7a2a4076976"><td class="memItemLeft" align="right" valign="top"><a id="ab724138fd75b4ea7be62c7a2a4076976" name="ab724138fd75b4ea7be62c7a2a4076976"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>plan_status_t</b> { <br />
+&#160;&#160;<b>PLAN_OK</b> = 0
+, <b>PLAN_NO_PATH</b> = 2
+, <b>PLAN_INVALID_ARG</b> = 3
+, <b>PLAN_OUT_OF_BOUNDS</b> = 4
+, <br />
+&#160;&#160;<b>PLAN_MAP_ERROR</b> = 5
+<br />
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:a7f145007ecdb334460464912301874f8" id="r_a7f145007ecdb334460464912301874f8"><td class="memItemLeft" align="right" valign="top">plan_status_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f145007ecdb334460464912301874f8">astar_plan_c</a> (const int32_t *occ, int32_t rows, int32_t cols, int32_t sx, int32_t sy, int32_t gx, int32_t gy, int32_t block_threshold, int32_t allow_diagonal, <a class="el" href="structpoint__i32.html">point_i32</a> *path_out, int32_t *path_len_inout, char *errbuf, int32_t errbuf_len)</td></tr>
+<tr class="memdesc:a7f145007ecdb334460464912301874f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">A* 経路探索（占有率0–100、block_threshold超えは障害物）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>C API for A* planning. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a7f145007ecdb334460464912301874f8" name="a7f145007ecdb334460464912301874f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f145007ecdb334460464912301874f8">&#9670;&#160;</a></span>astar_plan_c()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">plan_status_t astar_plan_c </td>
+          <td>(</td>
+          <td class="paramtype">const int32_t *</td>          <td class="paramname"><span class="paramname"><em>occ</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>rows</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>cols</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>sx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>sy</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>gx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>gy</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>block_threshold</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>allow_diagonal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpoint__i32.html">point_i32</a> *</td>          <td class="paramname"><span class="paramname"><em>path_out</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t *</td>          <td class="paramname"><span class="paramname"><em>path_len_inout</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>errbuf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t</td>          <td class="paramname"><span class="paramname"><em>errbuf_len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A* 経路探索（占有率0–100、block_threshold超えは障害物） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">occ</td><td>rows*cols 要素の占有率グリッド（行優先, y行x列, 0..100） </td></tr>
+    <tr><td class="paramname">rows,cols</td><td>グリッドサイズ </td></tr>
+    <tr><td class="paramname">sx,sy</td><td>start (x,y) 左上原点, x=col, y=row </td></tr>
+    <tr><td class="paramname">gx,gy</td><td>goal (x,y) </td></tr>
+    <tr><td class="paramname">block_threshold</td><td>これ「より大きい」セルを障害物扱い（例: 50） </td></tr>
+    <tr><td class="paramname">allow_diagonal</td><td>0=4近傍, 非0=8近傍（斜めコスト=√2） </td></tr>
+    <tr><td class="paramname">path_out</td><td>呼び出し側確保バッファ（point_i32配列）。NULL可（長さだけ知りたいとき） </td></tr>
+    <tr><td class="paramname">path_len_inout</td><td>入力: path_outの最大要素数。出力: 実際に書き込んだ要素数。 start==goal の場合は 0（長さ0パス）。 </td></tr>
+    <tr><td class="paramname">errbuf</td><td>エラーメッセージ出力（NULL可） </td></tr>
+    <tr><td class="paramname">errbuf_len</td><td>errbuf のサイズ（bytes）。0可。</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>plan_status_t 成功時 PLAN_OK。失敗時は各種ステータス（errbufに理由文字列）。</dd></dl>
+<p>備考:</p><ul>
+<li>パスの並びは start→goal の順。</li>
+<li>allow_diagonal=0 のときヒューリスティックはマンハッタン、!=0 のときはオクタイル。</li>
+<li>スレッドセーフ（内部で静的状態を持たない）。 </li>
+</ul>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_4270bfced15e0e73154b13468c7c9ad9.html">core</a></li><li class="navelem"><a href="dir_24d671cfcbc5d5238a6bd565a49d198f.html">include</a></li><li class="navelem"><a href="dir_eb2d9ae17f43509e8dd1a91fe4cac303.html">engine</a></li><li class="navelem"><a href="astar__c_8h.html">astar_c.h</a></li>
+    <li class="footer">構築: <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

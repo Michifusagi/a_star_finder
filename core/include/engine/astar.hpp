@@ -31,6 +31,24 @@ struct PlanResult {
     PlanStats stats; // 計測
 };
 
+// 失敗理由の列挙
+enum class PlanStatus {
+    Ok = 0,
+    NoPath,        // 経路が見つからない
+    OutOfBounds,   // start/goal がグリッド外
+    InvalidArg,    // start/goal が障害物 等
+    MapError       // 行列サイズ不正などロード失敗系
+};
+
+// 結果+ステータス
+struct PlanOutcome {
+    PlanStatus status = PlanStatus::MapError;
+    std::optional<PlanResult> result;  // Ok のときだけ値を持つ
+};
+
+// 上位互換API（新設）
+PlanOutcome astar_plan_ex(const Grid& g, Cell start, Cell goal, const AstarConfig& cfg);
+
 // メイン関数
 std::optional<PlanResult> // これは戻り値の型
 astar_plan(const Grid& g, Cell start, Cell goal, const AstarConfig& cfg);

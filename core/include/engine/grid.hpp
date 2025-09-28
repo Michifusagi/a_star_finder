@@ -20,6 +20,24 @@ struct Grid {
     inline uint8_t at(int r, int c) const { return occ[r*cols + c]; }
 };
 
+enum class LoadStatus {
+    Ok = 0,
+    FileOpenFailed,
+    EmptyFile,
+    RowLengthMismatch,  // 行ごとに列数が異なる
+    NonIntegerToken,    // 数値に変換できないトークン
+    OutOfRangeToken     // 0..100 の範囲外
+};
+
+struct LoadResult {
+    LoadStatus status = LoadStatus::FileOpenFailed;
+    std::optional<Grid> grid;  // Ok のときのみ値あり
+    int error_line = -1;       // 1始まり、分かる場合のみ
+    int error_column = -1;     // 1始まり、分かる場合のみ
+};
+
+LoadResult load_csv_ex(const std::string& path);
+
 // CSVローダ（M1はこれだけでOK）
 std::optional<Grid> load_csv(const std::string& path);
 
